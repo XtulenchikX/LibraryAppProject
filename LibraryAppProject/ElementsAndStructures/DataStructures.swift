@@ -1,6 +1,7 @@
 import SwiftUI
 import Foundation
 
+
 struct LibEvent: Identifiable, Codable {
     var id: Int { eventId }
     var imageURL: String
