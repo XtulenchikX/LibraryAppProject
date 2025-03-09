@@ -1,10 +1,3 @@
-//
-//  Colors.swift
-//  LibraryProjectTesting
-//
-//  Created by Максим Стецук on 04.11.2024.
-//
-
 import SwiftUI
 
 var customFont: Font {
