@@ -1,5 +1,6 @@
 import SwiftUI
 
+
 struct CardHeaderImage: View {
     var imageURL: String
     var plugImageName: String

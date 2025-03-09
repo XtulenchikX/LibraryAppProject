@@ -1,5 +1,6 @@
 import SwiftUI
 
+
 struct ContentView: View {
     @StateObject private var eventLoader = EventLoader()
     @State private var selectedTab = 0
