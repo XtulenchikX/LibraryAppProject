@@ -13,9 +13,11 @@ struct LibEvent: Identifiable, Codable {
     var libId: Int
 }
 
+
 struct EventResponse: Codable {
     var events: [LibEvent]
 }
+
 
 struct LibEventData: Identifiable {
     var id = UUID()
@@ -35,6 +37,7 @@ struct LibEventData: Identifiable {
     var eventLink: String?
 }
 
+
 struct Library: Identifiable {
     var id = UUID()
     var imageURL: String
@@ -43,6 +46,7 @@ struct Library: Identifiable {
     var libLoc: String
     var libId: Int
 }
+
 
 struct LibraryData: Identifiable {
     var id = UUID()
