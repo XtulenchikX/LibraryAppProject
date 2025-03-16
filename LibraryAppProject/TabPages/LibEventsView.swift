@@ -91,110 +91,130 @@ struct LibEventsView: View {
 
 struct LibEventDetailView: View {
     var libEventData: LibEventData
+    @State private var showWebView = false
     
     var body: some View {
         ScrollView {
-                VStack(alignment: .leading) {
-                    AsyncImage(url: URL(string: libEventData.imageURL)) { phase in
-                        switch phase {
-                        case .empty:
-                            ProgressView()
-                        case .success(let image):
-                            image
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                        case .failure(_):
-                            Image("image5")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                        @unknown default:
-                            Image("image5")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                        }
+            VStack(alignment: .leading) {
+                AsyncImage(url: URL(string: libEventData.imageURL)) { phase in
+                    switch phase {
+                    case .empty:
+                        ProgressView()
+                    case .success(let image):
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                    case .failure(_):
+                        Image("image5")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                    @unknown default:
+                        Image("image5")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
                     }
-                    HStack {
-                        Text(libEventData.eventType)
-                            .font(customFont)
-                            .bold()
-                            .foregroundColor(customColor)
-                        
-                        Text(libEventData.ageRating)
-                            .font(.headline)
-                            .frame(width: 60)
-                            .background(customColor)
-                            .cornerRadius(4)
-                            .foregroundColor(.white)
-                    }
-                    .frame(maxWidth: .infinity, alignment: .trailing)
-                    .padding(.horizontal)
-                    Divider()
-                    Text(libEventData.eventName)
-                        .font(.custom("Helvetica Neue", size: 20))
-                        .padding(.horizontal)
-                        .foregroundColor(customColor)
-                        .multilineTextAlignment(.leading)
-                        .padding(.bottom, 5)
-                    Text(libEventData.eventData)
+                }
+                HStack {
+                    Text(libEventData.eventType)
                         .font(customFont)
-                        .italic()
+                        .bold()
+                        .foregroundColor(customColor)
+                    
+                    Text(libEventData.ageRating)
+                        .font(.headline)
+                        .frame(width: 60)
+                        .background(customColor)
+                        .cornerRadius(4)
+                        .foregroundColor(.white)
+                }
+                .frame(maxWidth: .infinity, alignment: .trailing)
+                .padding(.horizontal)
+                Divider()
+                Text(libEventData.eventName)
+                    .font(.custom("Helvetica Neue", size: 20))
+                    .padding(.horizontal)
+                    .foregroundColor(customColor)
+                    .multilineTextAlignment(.leading)
+                    .padding(.bottom, 5)
+                Text(libEventData.eventData)
+                    .font(customFont)
+                    .italic()
+                    .foregroundColor(customColor)
+                    .multilineTextAlignment(.leading)
+                    .padding(.bottom, 5)
+                    .padding(.horizontal, 25)
+                Divider()
+                    .padding(.bottom, 5)
+                HStack {
+                    Image(systemName: "clock")
+                        .foregroundColor(customColor)
+                    Text(libEventData.dateTime)
+                        .font(customFont)
                         .foregroundColor(customColor)
                         .multilineTextAlignment(.leading)
-                        .padding(.bottom, 5)
-                        .padding(.horizontal, 25)
-                    Divider()
-                        .padding(.bottom, 5)
-                    HStack {
-                        Image(systemName: "clock")
-                            .foregroundColor(customColor)
-                        Text(libEventData.dateTime)
-                            .font(customFont)
-                            .foregroundColor(customColor)
-                            .multilineTextAlignment(.leading)
-                    }
-                    .padding(.bottom, 1)
-                    .padding(.horizontal)
-                    
-                    HStack {
-                        Image(systemName: "mappin.and.ellipse")
-                            .foregroundColor(customColor)
-                        Text(libEventData.eventLoc)
-                            .font(customFont)
-                            .foregroundColor(customColor)
-                            .multilineTextAlignment(.leading)
-                    }
-                    .padding(.bottom, 5)
-                    .padding(.horizontal)
-                    if let link = libEventData.eventLink, !link.isEmpty {
-                        Button(action: {
-                            if let url = URL(string: link) {
-                                UIApplication.shared.open(url)
-                            }
-                        }) {
-                            Text("Перейти на сайт")
-                                .font(.headline)
-                                .foregroundColor(.white)
-                                .padding()
-                                .background(customColor)
-                                .cornerRadius(10)
-                        }
-                        .padding(.top, 20)
-                        .frame(maxWidth: .infinity)
-                        .multilineTextAlignment(.center)
-                        .padding(.bottom, 15)
-                    }
                 }
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-            .navigationTitle("")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Text("Описание мероприятия")
-                        .font(.system(size: 20, weight: .bold))
+                .padding(.bottom, 1)
+                .padding(.horizontal)
+                
+                HStack {
+                    Image(systemName: "mappin.and.ellipse")
                         .foregroundColor(customColor)
+                    Text(libEventData.eventLoc)
+                        .font(customFont)
+                        .foregroundColor(customColor)
+                        .multilineTextAlignment(.leading)
                 }
+                .padding(.bottom, 5)
+                .padding(.horizontal)
+                if let link = libEventData.eventLink, !link.isEmpty {
+                    Button(action: {
+                        if let url = URL(string: link) {
+                            UIApplication.shared.open(url)
+                        }
+                    }) {
+                        Text("Перейти на сайт")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(customColor)
+                            .cornerRadius(10)
+                    }
+                    .padding(.top, 20)
+                    .frame(maxWidth: .infinity)
+                    .multilineTextAlignment(.center)
+                }
+                
+                Button(action: {
+                    showWebView = true
+                }) {
+                    Text("Открыть в приложении")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(customColor)
+                        .cornerRadius(10)
+                }
+                .padding(.top, 20)
+                .frame(maxWidth: .infinity)
+                .multilineTextAlignment(.center)
+                .padding(.bottom, 15)
             }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+        .navigationTitle("")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text("Описание мероприятия")
+                    .font(.system(size: 20, weight: .bold))
+                    .foregroundColor(customColor)
+            }
+        }
+        .sheet(isPresented: $showWebView) {
+            if let link = libEventData.eventLink, let url = URL(string: link) {
+                WebViewContainer(url: url, isPresented: $showWebView)
+            }
+        }
     }
 }
 
