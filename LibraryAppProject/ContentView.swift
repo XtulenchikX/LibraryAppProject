@@ -25,7 +25,7 @@ struct ContentView: View {
                 }
                 .tag(2)
         }
-        .onChange(of: selectedTab) { newTabIndex in
+        .onChange(of: selectedTab) {_, newTabIndex in
             if newTabIndex == 1 {
                 eventLoader.loadEvents()
             }

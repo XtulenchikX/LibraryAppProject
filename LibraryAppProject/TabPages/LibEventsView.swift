@@ -138,7 +138,6 @@ struct LibEventDetailView: View {
                     .padding(.bottom, 5)
                 Text(libEventData.eventData)
                     .font(customFont)
-                    .italic()
                     .foregroundColor(customColor)
                     .multilineTextAlignment(.leading)
                     .padding(.bottom, 5)
@@ -167,37 +166,36 @@ struct LibEventDetailView: View {
                 .padding(.bottom, 5)
                 .padding(.horizontal)
                 if let link = libEventData.eventLink, !link.isEmpty {
-                    Button(action: {
-                        if let url = URL(string: link) {
-                            UIApplication.shared.open(url)
+                    HStack(spacing: 16) {
+                        Button(action: {
+                            if let url = URL(string: link) {
+                                UIApplication.shared.open(url)
+                            }
+                        }) {
+                            Text("На сайт")
+                                .font(.headline)
+                                .foregroundColor(.white)
+                                .padding()
+                                .background(customColor)
+                                .cornerRadius(10)
+                                .lineLimit(1)
                         }
-                    }) {
-                        Text("Перейти на сайт")
-                            .font(.headline)
-                            .foregroundColor(.white)
-                            .padding()
-                            .background(customColor)
-                            .cornerRadius(10)
+
+                        Button(action: {
+                            showWebView = true
+                        }) {
+                            Text("Открыть в приложении")
+                                .font(.headline)
+                                .foregroundColor(.white)
+                                .padding()
+                                .background(customColor)
+                                .cornerRadius(10)
+                                .lineLimit(1)
+                        }
                     }
-                    .padding(.top, 20)
-                    .frame(maxWidth: .infinity)
-                    .multilineTextAlignment(.center)
+                    .padding(.vertical, 20)
+                    .padding(.horizontal, 16)
                 }
-                
-                Button(action: {
-                    showWebView = true
-                }) {
-                    Text("Открыть в приложении")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(customColor)
-                        .cornerRadius(10)
-                }
-                .padding(.top, 20)
-                .frame(maxWidth: .infinity)
-                .multilineTextAlignment(.center)
-                .padding(.bottom, 15)
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
