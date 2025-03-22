@@ -1,5 +1,6 @@
 import SwiftUI
 
+// MARK: The structure of the expandable description element
 
 struct ExpandableDescriptionView: View {
     var title: String
@@ -42,6 +43,8 @@ struct ExpandableDescriptionView: View {
         }
     }
 }
+
+// MARK: The structure of images selection
 
 struct ImagesScrollCollection: View {
     var imageURLs: [String]
@@ -130,4 +133,3 @@ struct ImagesScrollCollection: View {
         }
     }
 }
-
