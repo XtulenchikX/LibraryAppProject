@@ -3,7 +3,7 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var eventLoader = EventLoader()
-    @State private var selectedTab = 0
+    @State private var selectedTab: Tab = .libraries
 
     var body: some View {
         TabView(selection: $selectedTab) {
@@ -11,27 +11,32 @@ struct ContentView: View {
                 .tabItem {
                     Label("Библиотеки", systemImage: "book")
                 }
-                .tag(0)
+                .tag(Tab.libraries)
 
             LibEventsView(libEvents: eventLoader.libEvents)
                 .tabItem {
                     Label("Мероприятия", systemImage: "list.bullet")
                 }
-                .tag(1)
+                .tag(Tab.events)
 
             NewSectionView()
                 .tabItem {
                     Label("Новый раздел", systemImage: "square.grid.2x2")
                 }
-                .tag(2)
+                .tag(Tab.info)
         }
         .onChange(of: selectedTab) {_, newTabIndex in
-            if newTabIndex == 1 {
+            if newTabIndex == Tab.events {
                 eventLoader.loadEvents()
             }
         }
         .onAppear {
             eventLoader.loadEvents()
+        }
+        .onOpenURL { url in
+            if let tab = DeepLinkHandler.handleDeepLink(url: url) {
+                selectedTab = tab
+            }
         }
     }
 }
