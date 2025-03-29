@@ -104,3 +104,12 @@ struct UpdLibraryData: Identifiable {
 struct EventResponse: Codable {
     var events: [LibEvent]
 }
+
+// MARK: Data structure for NotificationView
+
+struct FullscreenNotification {
+    var imageURL: String
+    var header: String
+    var mainText: String
+    var eventsId: Int
+}
