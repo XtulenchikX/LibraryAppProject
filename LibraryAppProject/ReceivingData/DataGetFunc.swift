@@ -134,3 +134,17 @@ func getEventsByLibId(libId: Int) -> [LibEvent] {
     let filteredEvents = allEvents.filter { $0.libId == libId }
     return filteredEvents
 }
+
+
+func getFullscreenData() -> FullscreenNotification? {
+    let data = FullscreenNotification(
+        imageURL: "https://ucare.timepad.ru/301b3a31-3f8f-4024-af08-71cb9e1d087b/-/preview/1248x1248/-/format/jpeg/poster_event_3087406.jpg",
+        header: "Заголовок",
+        mainText: "Основной текст уведомления, который может занимать несколько строк.",
+        eventsId: 3
+    )
+    
+//    let data: FullscreenNotification? = nil
+    
+    return data
+}
