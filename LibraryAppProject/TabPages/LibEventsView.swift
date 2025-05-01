@@ -84,7 +84,6 @@ struct LibEventsView: View {
                         .padding(.bottom, 5)
                 }
             }
-            
         }
     }
 }

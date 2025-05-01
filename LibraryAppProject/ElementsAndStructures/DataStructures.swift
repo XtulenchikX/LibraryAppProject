@@ -99,15 +99,19 @@ struct UpdLibraryData: Identifiable {
     var libLink: String?
 }
 
-// MARK: Data structures for mapping
+// MARK: Data structures for mapping info
 
 struct EventResponse: Codable {
     var events: [LibEvent]
 }
 
+struct FullscreenNotificationResponse: Codable {
+    var notification: FullscreenNotification
+}
+
 // MARK: Data structure for NotificationView
 
-struct FullscreenNotification {
+struct FullscreenNotification: Codable {
     var imageURL: String
     var header: String
     var mainText: String
