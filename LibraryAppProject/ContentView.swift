@@ -2,7 +2,8 @@ import SwiftUI
 
 
 struct ContentView: View {
-    @StateObject private var eventLoader = EventLoader()
+    @StateObject private var eventLoader = EventsListLoader()
+    @StateObject private var fullscreenLoader = FullscreenLoader()
     @State private var selectedTab: Tab = .libraries
     @State private var selectedEventId: Int? = nil
     @State private var isFullscreenPresented: Bool = false
@@ -17,12 +18,18 @@ struct ContentView: View {
                         Label("Библиотеки", systemImage: "book")
                     }
                     .tag(Tab.libraries)
+                    .refreshable {
+                        // Add call of load libs list function
+                    }
 
                 LibEventsView(libEvents: eventLoader.libEvents)
                     .tabItem {
                         Label("Мероприятия", systemImage: "list.bullet")
                     }
                     .tag(Tab.events)
+                    .refreshable {
+                        eventLoader.loadEvents()
+                    }
 
                 NewSectionView()
                     .tabItem {
@@ -30,18 +37,11 @@ struct ContentView: View {
                     }
                     .tag(Tab.info)
             }
-            .onChange(of: selectedTab) { _, newTabIndex in
-                if newTabIndex == Tab.events {
-                    eventLoader.loadEvents()
-                }
-            }
-            .onAppear {
-                if let notificationData = getFullscreenData(), !isOpenByDeepLink {
-                    self.isFullscreenPresented = true
+            .onReceive(fullscreenLoader.$fullscreenData.compactMap { $0 }) { notificationData in
+                if !isOpenByDeepLink {
                     self.fullscreenData = notificationData
+                    self.isFullscreenPresented = true
                 }
-                
-                eventLoader.loadEvents()
             }
             .onOpenURL { url in
                 if let tab = DeepLinkHandler.handleDeepLink(url: url) {
