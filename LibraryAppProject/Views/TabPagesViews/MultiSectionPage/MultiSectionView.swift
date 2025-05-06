@@ -1,39 +1,26 @@
+// Preparation of a multisection view for further development
+// Not called on project build
+// To use deeplink use 'case = info' and tag info at 'ContentView' after calling the struct in code
+
 import SwiftUI
 
+// MARK: - Multi Sections Tab View
 
-struct Subsection1View: View {
-    var body: some View {
-        VStack {
-            Text("Контент первого подраздела")
-                .font(.title)
-        }
-    }
-}
-
-
-struct Subsection2View: View {
+struct MultiSectionView: View {
     
-    var body: some View {
-        NavigationView{
-            ScrollView{
-                VStack {
-                    ExpandableDescriptionView(title: "title 1", description: "aaaaaaaaaancbcbjbcjbwjcbme,cb,mebcjkbecnbejcnecnenckeneklnclenc", customColor: customColor, customFont: customFont)
-                }
-            }
-        }
-    }
-}
-
-struct NewSectionView: View {
+    // MARK: - States
+    
     @State private var selectedTab = 0
-
+    
+    // MARK: - Body
+    
     var body: some View {
         NavigationView {
             VStack {
                 if selectedTab == 0 {
-                    Subsection1View()
+                    InfoSectionView()
                 } else if selectedTab == 1 {
-                    Subsection2View()
+                    QuestionsSectionView()
                 }
             }
             .toolbar {
@@ -51,7 +38,7 @@ struct NewSectionView: View {
                             Text("Мои книги")
                                 .font(subsectionFont)
                                 .foregroundColor(Color.white)
-//                                .fontWeight(selectedTab == 0 ? .bold : .regular)
+                                .fontWeight(selectedTab == 0 ? .bold : .regular)
                                 .bold()
                                 .padding(.bottom, 5)
                                 .underline(selectedTab == 0)
@@ -66,7 +53,7 @@ struct NewSectionView: View {
                             Text("Вопросы")
                                 .font(subsectionFont)
                                 .foregroundColor(Color.white)
-//                                .fontWeight(selectedTab == 1 ? .bold : .regular)
+                                .fontWeight(selectedTab == 1 ? .bold : .regular)
                                 .bold()
                                 .padding(.bottom, 5)
                                 .underline(selectedTab == 1)
@@ -79,5 +66,3 @@ struct NewSectionView: View {
         }
     }
 }
-
-

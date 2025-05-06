@@ -30,12 +30,6 @@ struct ContentView: View {
                     .refreshable {
                         eventLoader.loadEvents()
                     }
-
-                NewSectionView()
-                    .tabItem {
-                        Label("Новый раздел", systemImage: "square.grid.2x2")
-                    }
-                    .tag(Tab.info)
             }
             .onReceive(fullscreenLoader.$fullscreenData.compactMap { $0 }) { notificationData in
                 if !isOpenByDeepLink {

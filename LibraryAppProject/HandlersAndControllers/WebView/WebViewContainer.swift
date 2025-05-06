@@ -1,23 +1,19 @@
 import SwiftUI
 import WebKit
 
-struct WebView: UIViewRepresentable {
-    let url: URL
-    
-    func makeUIView(context: Context) -> WKWebView {
-        let webView = WKWebView()
-        let request = URLRequest(url: url)
-        webView.load(request)
-        return webView
-    }
-    
-    func updateUIView(_ webView: WKWebView, context: Context) {}
-}
-
+// MARK: - Web View Container
 
 struct WebViewContainer: View {
+    
+    // MARK: - Input Properties
+    
     let url: URL
+    
+    // MARK: - Bindings
+    
     @Binding var isPresented: Bool
+    
+    // MARK: - Body
 
     var body: some View {
         NavigationView {
@@ -42,11 +38,9 @@ struct WebViewContainer: View {
                     .padding(.top, 6)
                 }
                 
-                WebView(url: url)
+                WebViewController(url: url)
                     .padding(-10)
             }
         }
     }
 }
-
-
