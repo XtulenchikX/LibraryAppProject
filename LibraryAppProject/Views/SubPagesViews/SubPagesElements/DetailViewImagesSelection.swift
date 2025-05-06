@@ -1,54 +1,18 @@
 import SwiftUI
 
-// MARK: The structure of the expandable description element
+// MARK: - Deatil View Scrollable Images Selection
 
-struct ExpandableDescriptionView: View {
-    var title: String
-    var description: String
-    var customColor: Color
-    var customFont: Font
+struct DetailViewImagesSelection: View {
     
-    @State private var isDescriptionExpanded: Bool = false
+    // MARK: - Input Properties
     
-    var body: some View {
-        VStack {
-            Button(action: {
-                withAnimation {
-                    isDescriptionExpanded.toggle()
-                }
-            }) {
-                HStack {
-                    Text(title)
-                        .font(.custom("Helvetica Neue", size: 20))
-                        .padding(.horizontal)
-                        .foregroundColor(customColor)
-                    Spacer()
-                    Image(systemName: isDescriptionExpanded ? "chevron.down" : "chevron.right")
-                        .foregroundColor(customColor)
-                        .padding(.trailing)
-                }
-                .padding(.bottom, 10)
-            }
-            
-            if isDescriptionExpanded {
-                Text(description)
-                    .font(customFont)
-                    .foregroundColor(customColor)
-                    .multilineTextAlignment(.leading)
-                    .padding(.top, -10)
-                    .padding(.bottom, 5)
-                    .padding(.horizontal, 25)
-                    .transition(.opacity)
-            }
-        }
-    }
-}
-
-// MARK: The structure of images selection
-
-struct ImagesScrollCollection: View {
     var imageURLs: [String]
+    
+    // MARK: - Bindings
+    
     @Binding var selectedImage: String?
+    
+    // MARK: - Body
 
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
@@ -101,7 +65,6 @@ struct ImagesScrollCollection: View {
             }
             .padding(.horizontal)
         }
-        
         if let selectedImageURL = selectedImage {
             AsyncImage(url: URL(string: selectedImageURL)) { phase in
                 switch phase {

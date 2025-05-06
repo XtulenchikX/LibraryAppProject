@@ -12,7 +12,7 @@ struct FullscreenNotificationView: View {
     
     @Binding var isPresented: Bool
     
-    // MARK: - State
+    // MARK: - States
     
     @State private var isEventPresented: Bool = false
     
@@ -25,22 +25,20 @@ struct FullscreenNotificationView: View {
     var body: some View {
         
         ZStack {
-            FullscreenBackgroundImage(imageURL: notification.imageURL, plugImageName: "image5")
-            
+            FullscreenBackgroundImage(
+                imageURL: notification.imageURL,
+                plugImageName: plugImageName
+            )
             VStack {
-                
                 NotificationTextBlock(
                     headerText: notification.header,
                     mainText: notification.mainText
                 )
-                
                 Spacer()
-                
                 FullscreenActionButtons(
                     acceptAction: { isEventPresented = true },
                     declineAction: { isPresented = false }
                 )
-                
             }
         }
         .toolbar {
