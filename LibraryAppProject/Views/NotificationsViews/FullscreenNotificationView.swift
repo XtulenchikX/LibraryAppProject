@@ -18,28 +18,28 @@ struct FullscreenNotificationView: View {
     
     // MARK: - Private Properties
     
-    private let plugImageName = "image5"
+    private let plugImageName = "fullscreenPlaceholder"
     
     // MARK: - Body
     
     var body: some View {
-        
-        ZStack {
+        VStack {
+            NotificationTextBlock(
+                headerText: notification.header,
+                mainText: notification.mainText
+            )
+            Spacer()
+            FullscreenActionButtons(
+                acceptAction: { isEventPresented = true },
+                declineAction: { isPresented = false }
+            )
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background {
             FullscreenBackgroundImage(
                 imageURL: notification.imageURL,
                 plugImageName: plugImageName
             )
-            VStack {
-                NotificationTextBlock(
-                    headerText: notification.header,
-                    mainText: notification.mainText
-                )
-                Spacer()
-                FullscreenActionButtons(
-                    acceptAction: { isEventPresented = true },
-                    declineAction: { isPresented = false }
-                )
-            }
         }
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {

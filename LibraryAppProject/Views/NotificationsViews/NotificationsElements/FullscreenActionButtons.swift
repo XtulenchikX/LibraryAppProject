@@ -1,6 +1,6 @@
 import SwiftUI
 
-// MARK: Fullscreen Action Buttons
+// MARK: - Fullscreen Action Buttons
 
 struct FullscreenActionButtons: View {
     
@@ -30,10 +30,10 @@ struct FullscreenActionButtons: View {
                     .foregroundColor(.white)
                     .cornerRadius(10)
             }
+            .padding(.bottom, 50)
         }
         .frame(maxWidth: 300)
         .padding(.horizontal, 20)
-        .padding(.bottom, 30)
     }
 }
 

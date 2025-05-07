@@ -16,20 +16,26 @@ struct FullscreenBackgroundImage: View {
             switch phase {
             case .empty:
                 ProgressView()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(Color.black)
+                    .ignoresSafeArea()
             case .success(let image):
                 image
                     .resizable()
                     .scaledToFill()
+                    .clipped()
                     .ignoresSafeArea()
             case .failure(_):
                 Image(plugImageName)
                     .resizable()
                     .scaledToFill()
+                    .clipped()
                     .ignoresSafeArea()
             @unknown default:
                 Image(plugImageName)
                     .resizable()
                     .scaledToFill()
+                    .clipped()
                     .ignoresSafeArea()
             }
         }
