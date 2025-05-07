@@ -29,6 +29,7 @@ struct NotificationTextBlock: View {
                 .frame(maxWidth: UIScreen.main.bounds.width * 0.9)
                 .padding(.horizontal, 20)
         }
+        .padding(.top, 10)
         .padding(.vertical, 30)
         .padding(.horizontal, 20)
     }

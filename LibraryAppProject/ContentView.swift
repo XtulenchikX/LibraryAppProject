@@ -3,6 +3,7 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var eventLoader = EventsListLoader()
+    @StateObject private var libraryLoader = LibrariesListLoader()
     @StateObject private var fullscreenLoader = FullscreenLoader()
     @State private var selectedTab: Tab = .libraries
     @State private var selectedEventId: Int? = nil
@@ -13,13 +14,13 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             TabView(selection: $selectedTab) {
-                LibrariesView(libraries: GetLibList())
+                LibrariesView(libraries: libraryLoader.libraries)
                     .tabItem {
                         Label("Библиотеки", systemImage: "book")
                     }
                     .tag(Tab.libraries)
                     .refreshable {
-                        // Add call of load libs list function
+                        libraryLoader.loadLibraries()
                     }
 
                 LibEventsView(libEvents: eventLoader.libEvents)

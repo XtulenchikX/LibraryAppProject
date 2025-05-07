@@ -48,7 +48,6 @@ struct LibraryDetailView: View {
                     customColor: customColor,
                     cardBackground: customColor3
                 )
-
                 DetailViewLinkButton(
                     link: libraryData.libLink ?? "",
                     customColor: customColor,
