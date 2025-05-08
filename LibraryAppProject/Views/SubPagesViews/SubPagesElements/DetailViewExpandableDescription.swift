@@ -1,6 +1,6 @@
 import SwiftUI
 
-// MARK: - Deatil View Expandable Description Text Element
+// MARK: - Detail View Expandable Description Text Element
 
 struct DetailViewExpandableDescription: View {
     

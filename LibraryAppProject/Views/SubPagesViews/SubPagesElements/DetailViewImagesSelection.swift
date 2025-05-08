@@ -1,6 +1,6 @@
 import SwiftUI
 
-// MARK: - Deatil View Scrollable Images Selection
+// MARK: - Detail View Scrollable Images Selection
 
 struct DetailViewImagesSelection: View {
     

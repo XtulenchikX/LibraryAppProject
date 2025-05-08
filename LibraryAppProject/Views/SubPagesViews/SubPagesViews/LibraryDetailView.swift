@@ -43,7 +43,7 @@ struct LibraryDetailView: View {
                     selectedImage: $selectedImageNew
                 )
                 Divider()
-                LibraryEventsSection(
+                DetailViewLibraryEventsSelection(
                     libId: libraryData.libId,
                     customColor: customColor,
                     cardBackground: customColor3

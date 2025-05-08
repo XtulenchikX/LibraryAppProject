@@ -1,8 +1,8 @@
 import SwiftUI
 
-// MARK: - Deatil View Current Library Events Selection
+// MARK: - Detail View Events Selection
 
-struct LibraryEventsSection: View {
+struct DetailViewLibraryEventsSelection: View {
     
     // MARK: - Input Properties
     
@@ -10,23 +10,44 @@ struct LibraryEventsSection: View {
     let customColor: Color
     let cardBackground: Color
     
+    // MARK: - Observed Object
+
+    @ObservedObject var viewModel = LibraryEventsViewModel()
+    
+    // MARK: - States
+    
+    @State private var hasLoaded = false
+    
     // MARK: - Body
 
     var body: some View {
-        let events = getEventsByLibId(libId: libId)
+        VStack(alignment: .leading, spacing: 10) {
+            Text("Ближайшие мероприятия")
+                .font(.custom("Helvetica Neue", size: 20))
+                .bold()
+                .padding(.horizontal)
+                .foregroundColor(customColor)
 
-        if !events.isEmpty {
-            VStack(alignment: .leading, spacing: 10) {
-                Text("Ближайшие мероприятия")
-                    .font(.custom("Helvetica Neue", size: 20))
-                    .bold()
+            if viewModel.isLoading {
+                ProgressView("Загружается...")
+                    .progressViewStyle(CircularProgressViewStyle())
+                    .padding()
+            } else if viewModel.events.isEmpty {
+                Text("Мероприятий в ближайнее время нет")
+                    .foregroundColor(.gray)
                     .padding(.horizontal)
-                    .foregroundColor(customColor)
-
+            } else {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 10) {
-                        ForEach(events, id: \.eventId) { event in
-                            NavigationLink(destination: LibEventDetailView(libEventData: getLibEventById(eventId: event.eventId))) {
+                        ForEach(viewModel.events, id: \.eventId) { event in
+                            NavigationLink(destination:
+                                LoadingDetailView(
+                                    loader: EventDetailLoader(),
+                                    loadAction: { $0.loadDetailEventData(eventId: event.eventId) },
+                                    dataExtractor: { $0.eventDetailData },
+                                    content: { LibEventDetailView(libEventData: $0) }
+                                )
+                            ) {
                                 SubEventCardView(libEvent: event)
                                     .frame(width: UIScreen.main.bounds.width * 0.7)
                                     .background(cardBackground)
@@ -36,6 +57,12 @@ struct LibraryEventsSection: View {
                     }
                     .padding(.horizontal)
                 }
+            }
+        }
+        .onAppear {
+            if !hasLoaded {
+                hasLoaded = true
+                viewModel.loadEvents(libId: libId)
             }
         }
     }

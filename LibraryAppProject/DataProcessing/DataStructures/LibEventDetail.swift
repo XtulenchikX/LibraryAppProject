@@ -3,8 +3,8 @@ import Foundation
 
 // MARK: Data Structure For Event Detail View
 
-struct LibEventData: Identifiable {
-    var id = UUID()
+struct LibEventData: Identifiable, Codable {
+    var id: Int { eventId }
     var imageURL: String
     var eventName: String
     var dateTime: String
@@ -21,8 +21,8 @@ struct LibEventData: Identifiable {
     var eventLink: String?
 }
 
-struct UpdLibEventData: Identifiable {
-    var id = UUID()
+struct UpdLibEventData: Identifiable, Codable {
+    var id: Int { eventId }
     var imageURL: String
     var eventName: String
     var dateTime: String
@@ -33,4 +33,10 @@ struct UpdLibEventData: Identifiable {
     var eventData: String
     var eventTutor: String?
     var eventLink: String?
+}
+
+// MARK: Data Mapping Structure
+
+struct EventDetailResponse: Codable {
+    let eventDetailData: LibEventData
 }

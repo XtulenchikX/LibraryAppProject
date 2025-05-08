@@ -29,5 +29,13 @@ class EventsListLoader: ObservableObject {
             }
         }
     }
+        
+    func getLibraryEvents(libId: Int) -> AnyPublisher<[LibEvent], Never> {
+        $libEvents
+            .map { events in
+                events.filter { $0.libId == libId }
+            }
+            .eraseToAnyPublisher()
+    }
 }
 

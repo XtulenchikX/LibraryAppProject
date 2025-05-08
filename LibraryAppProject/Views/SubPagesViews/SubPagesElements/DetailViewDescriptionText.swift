@@ -1,6 +1,6 @@
 import SwiftUI
 
-// MARK: - Deatil View Description Text Element
+// MARK: - Detail View Description Text Element
 
 struct DetailViewDescriptionText: View {
     

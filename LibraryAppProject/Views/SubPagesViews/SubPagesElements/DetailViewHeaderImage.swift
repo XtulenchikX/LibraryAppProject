@@ -1,6 +1,6 @@
 import SwiftUI
 
-// MARK: - Deatil View Main Image Element
+// MARK: - Detail View Main Image Element
 
 struct DetailViewHeaderImage: View {
     

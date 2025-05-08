@@ -1,6 +1,6 @@
 import SwiftUI
 
-// MARK: - Deatil View Age Restriction And Event Type Tag
+// MARK: - Detail View Age Restriction And Event Type Tag
 
 struct LibEventTagView: View {
     
