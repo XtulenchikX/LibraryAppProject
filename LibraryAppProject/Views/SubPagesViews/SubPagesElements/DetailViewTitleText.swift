@@ -1,6 +1,6 @@
 import SwiftUI
 
-// MARK: - Deatil View Title Text Element
+// MARK: - Detail View Title Text Element
 
 struct DetailViewTitleText: View {
     

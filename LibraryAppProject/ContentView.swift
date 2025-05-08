@@ -54,7 +54,12 @@ struct ContentView: View {
 
             if let selectedEventId = selectedEventId {
                 NavigationStack {
-                    LibEventDetailView(libEventData: getLibEventById(eventId: selectedEventId))
+                    LoadingDetailView(
+                        loader: EventDetailLoader(),
+                        loadAction: { $0.loadDetailEventData(eventId: selectedEventId) },
+                        dataExtractor: { $0.eventDetailData },
+                        content: { LibEventDetailView(libEventData: $0) }
+                    )
                         .transition(.move(edge: .trailing))
                         .zIndex(1)
                         .toolbar {

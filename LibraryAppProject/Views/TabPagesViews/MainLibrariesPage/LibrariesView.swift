@@ -23,7 +23,12 @@ struct LibrariesView: View {
                     GenericNavigationListView(
                         items: libraries,
                         destination: { library in
-                            LibraryDetailView(libraryData: getLibraryById(libId: library.libId))
+                            LoadingDetailView(
+                                loader: LibraryDetailDataLoader(),
+                                loadAction: { $0.loadDetailLibraryData(libId: library.libId) },
+                                dataExtractor: { $0.libraryDetailData },
+                                content: { LibraryDetailView(libraryData: $0) }
+                            )
                         },
                         row: { library in
                             LibraryCardView(library: library)

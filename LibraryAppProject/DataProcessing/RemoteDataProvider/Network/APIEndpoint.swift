@@ -16,6 +16,18 @@ enum APIEndpoint {
         URL(string: "\(Environment.baseURL)/libraries")!
     }
     
+    // MARK: - Event Detail Data Endpoint
+    
+    static func eventDetail(eventId: Int) -> URL {
+        URL(string: "\(Environment.baseURL)/events/\(eventId)")!
+    }
+    
+    // MARK: - Library Detail Data Endpoint
+    
+    static func libraryDetail(libId: Int) -> URL {
+        URL(string: "\(Environment.baseURL)/libraries/\(libId)")!
+    }
+    
     // MARK: - Fullscreen Endpoint
     
     static var fullscreen: URL {

@@ -55,7 +55,12 @@ struct FullscreenNotificationView: View {
         }
         .fullScreenCover(isPresented: $isEventPresented) {
             NavigationStack {
-                LibEventDetailView(libEventData: getLibEventById(eventId: notification.eventsId))
+                LoadingDetailView(
+                    loader: EventDetailLoader(),
+                    loadAction: { $0.loadDetailEventData(eventId: notification.eventsId) },
+                    dataExtractor: { $0.eventDetailData },
+                    content: { LibEventDetailView(libEventData: $0) }
+                )
                     .toolbar {
                         ToolbarItem(placement: .navigationBarLeading) {
                             Button(action: {

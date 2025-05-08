@@ -39,7 +39,12 @@ struct LibEventsView: View {
                     GenericNavigationListView(
                         items: filteredEvents,
                         destination: { event in
-                            LibEventDetailView(libEventData: getLibEventById(eventId: event.eventId))
+                            LoadingDetailView(
+                                loader: EventDetailLoader(),
+                                loadAction: { $0.loadDetailEventData(eventId: event.eventId) },
+                                dataExtractor: { $0.eventDetailData },
+                                content: { LibEventDetailView(libEventData: $0) }
+                            )
                         },
                         row: { event in
                             LibEventCardView(libEvent: event)
