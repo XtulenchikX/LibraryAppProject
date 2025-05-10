@@ -33,7 +33,7 @@ struct ContentView: View {
                     }
                 MultiSectionView()
                     .tabItem {
-                        Label("Читателю", systemImage: "book")
+                        Label("Читателю", systemImage: "person")
                     }
                     .tag(Tab.info)
             }
