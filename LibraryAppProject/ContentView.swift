@@ -31,6 +31,11 @@ struct ContentView: View {
                     .refreshable {
                         eventLoader.loadEvents()
                     }
+                MultiSectionView()
+                    .tabItem {
+                        Label("Читателю", systemImage: "book")
+                    }
+                    .tag(Tab.info)
             }
             .onReceive(fullscreenLoader.$fullscreenData.compactMap { $0 }) { notificationData in
                 if !isOpenByDeepLink {

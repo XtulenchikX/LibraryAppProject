@@ -3,7 +3,7 @@ import Combine
 
 // MARK: - Event Detail Loader Class
 
-class LibraryDetailDataLoader: ObservableObject {
+class LibraryDetailLoader: ObservableObject {
     
     // MARK: - Public Properties
     
