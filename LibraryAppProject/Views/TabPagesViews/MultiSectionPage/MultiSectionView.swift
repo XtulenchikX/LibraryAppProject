@@ -1,7 +1,3 @@
-// Preparation of a multisection view for further development
-// Not called on project build
-// To use deeplink use 'case = info' and tag info at 'ContentView' after calling the struct in code
-
 import SwiftUI
 
 // MARK: - Multi Sections Tab View
@@ -18,50 +14,41 @@ struct MultiSectionView: View {
         NavigationView {
             VStack {
                 if selectedTab == 0 {
-                    InfoSectionView()
+                    ExtendBookSectionView()
                 } else if selectedTab == 1 {
+                    FeedbackSectionView()
+                } else if selectedTab == 2 {
                     QuestionsSectionView()
                 }
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    HStack {
-                        Image("logoCbs")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 25, height: 25)
-                        Button(action: {
-                            withAnimation {
-                                selectedTab = 0
-                            }
-                        }) {
-                            Text("Мои книги")
-                                .font(subsectionFont)
-                                .foregroundColor(Color.white)
-                                .fontWeight(selectedTab == 0 ? .bold : .regular)
-                                .bold()
-                                .padding(.bottom, 5)
-                                .underline(selectedTab == 0)
-                        }
-                        .padding(.horizontal, 5)
-                        
-                        Button(action: {
-                            withAnimation {
-                                selectedTab = 1
-                            }
-                        }) {
-                            Text("Вопросы")
-                                .font(subsectionFont)
-                                .foregroundColor(Color.white)
-                                .fontWeight(selectedTab == 1 ? .bold : .regular)
-                                .bold()
-                                .padding(.bottom, 5)
-                                .underline(selectedTab == 1)
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack {
+                            Image("logoCbs")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 40, height: 40)
+                            SectionTabButton(
+                                title: "Продлить книгу",
+                                index: 0,
+                                selected: $selectedTab
+                            )
+                            SectionTabButton(
+                                title: "Оставить отзыв",
+                                index: 1,
+                                selected: $selectedTab
+                            )
+                            SectionTabButton(
+                                title: "Популярные вопросы",
+                                index: 2,
+                                selected: $selectedTab
+                            )
                         }
                     }
                 }
             }
-            .toolbarBackground(customColor4, for: .navigationBar)
+            .toolbarBackground(customColor2, for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
         }
     }

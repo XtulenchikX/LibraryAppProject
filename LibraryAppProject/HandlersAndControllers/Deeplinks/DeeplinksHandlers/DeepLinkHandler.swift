@@ -10,9 +10,8 @@ struct DeepLinkHandler {
                 return .libraries
             case Tab.events.rawValue:
                 return .events
-// Uncomment after adding 'info' tab at ContenView
-//            case Tab.info.rawValue:
-//                return .info
+            case Tab.info.rawValue:
+                return .info
             default:
                 return nil
             }

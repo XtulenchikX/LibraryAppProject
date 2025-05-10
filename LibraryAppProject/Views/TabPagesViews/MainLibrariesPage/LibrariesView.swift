@@ -24,7 +24,7 @@ struct LibrariesView: View {
                         items: libraries,
                         destination: { library in
                             LoadingDetailView(
-                                loader: LibraryDetailDataLoader(),
+                                loader: LibraryDetailLoader(),
                                 loadAction: { $0.loadDetailLibraryData(libId: library.libId) },
                                 dataExtractor: { $0.libraryDetailData },
                                 content: { LibraryDetailView(libraryData: $0) }
