@@ -14,20 +14,22 @@ struct FullscreenActionButtons: View {
     var body: some View {
         VStack(spacing: 15) {
             Button(action: acceptAction) {
-                Text("Принять")
+                Text("Перейти к мероприятию")
+                    .bold()
                     .frame(maxWidth: .infinity)
                     .padding()
-                    .background(Color.green)
+                    .background(customColor)
                     .foregroundColor(.white)
                     .cornerRadius(10)
             }
 
             Button(action: declineAction) {
-                Text("Отклонить")
+                Text("Не интересно")
+                    .bold()
                     .frame(maxWidth: .infinity)
                     .padding()
-                    .background(Color.red)
-                    .foregroundColor(.white)
+                    .background(customColor5)
+                    .foregroundColor(customColor)
                     .cornerRadius(10)
             }
             .padding(.bottom, 50)
